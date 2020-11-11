@@ -7,8 +7,6 @@ namespace EmployeePayroll_Threading
     {
         static void Main(string[] args)
         {
-
-
             List<EmployeeDetails> employeeDetails = new List<EmployeeDetails>();
             employeeDetails.Add(new EmployeeDetails { EmpID = 1, EmpName = "Ruthik Reddy", PhoneNo = "5808983789", Address = "MBNR", Department = "IT", Gender = "Male" });
             employeeDetails.Add(new EmployeeDetails { EmpID = 2, EmpName = "Ishan", PhoneNo = "8521479630", Address = "HYD", Department = "HR", Gender = "Male" });
