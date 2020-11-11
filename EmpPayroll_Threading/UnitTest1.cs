@@ -18,10 +18,16 @@ namespace UnitTestProject1
             employeeDetails.Add(new EmployeeDetails { EmpID = 3, EmpName = "Rohith", PhoneNo = "1234568798", Address = "Mumbai", Department = "SALES", Gender = "Male" });
             employeeDetails.Add(new EmployeeDetails { EmpID = 4, EmpName = "AXAR", PhoneNo = "9632587410", Address = "Chennai", Department = "HR", Gender = "Female" });
             EmployeePayrollOperations employeePayrolloperations = new EmployeePayrollOperations();
+            // UC 1
             DateTime startDateTime = DateTime.Now;
             employeePayrolloperations.addEmployeeToPayroll(employeeDetails);
             DateTime stopDateTime = DateTime.Now;
             Console.WriteLine("Duration without thread: " + (stopDateTime - startDateTime));
+            /// UC 2
+            DateTime startDateTimeThread = DateTime.Now;
+            employeePayrolloperations.addEmployeeToPayrollWithThread(employeeDetails);
+            DateTime stopDateTimeThread = DateTime.Now;
+            Console.WriteLine("Duration without thread: " + (stopDateTimeThread - startDateTimeThread));
         }
     }
 }
