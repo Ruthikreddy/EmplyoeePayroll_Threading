@@ -17,6 +17,10 @@ namespace EmployeePayroll_Threading
         /// Adding employee details to the list
         /// </summary>
         /// <param name="employeePayrollDataList"></param>
+        ///   /// <summary>
+        /// Mutex class is defined to loack the syncronization of each thread
+        /// </summary>
+        public Mutex mutex = new Mutex();
         public void addEmployeeToPayroll(List<EmployeeDetails> employeePayrollDataList)
         {
             employeePayrollDataList.ForEach(employeeData =>
@@ -46,6 +50,28 @@ namespace EmployeePayroll_Threading
             });
             Console.WriteLine(this.employeePayrollDetailList.Count);
         }
+        /// <summary>
+        /// UC 4:
+        /// Synchronises the addition of multiple employees to list using Mutex() class.
+        /// </summary>
+        /// <param name="employeePayrollDataList"></param>
+        public void SynchronizingAddEmployeeWithThread(List<EmployeeDetails> employeePayrollDataList)
+        {
+            employeePayrollDataList.ForEach(employeeData =>
+            {
+                Task thread = new Task(() =>
+                {
+                    mutex.WaitOne();
+                    Console.WriteLine("Employee Being added" + employeeData.EmpName);
+                    this.addEmployeePayroll(employeeData);
+                    Console.WriteLine("Employee added:" + employeeData.EmpName);
+                    Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                    mutex.ReleaseMutex();
+                });
+                thread.Start();
+            });
+        }
+
         public void addEmployeePayroll(EmployeeDetails emp)
         {
             employeePayrollDetailList.Add(emp);
